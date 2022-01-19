@@ -12,7 +12,8 @@ persist_with: looker_intensive7_t_khottchenkova_default_datagroup
 
 
 explore: f_lineitems {
-  view_label: "Lineitems"
+  label: "Line Items"
+  view_label: "Line Items"
   join:  d_supplier{
     view_label: "Suppliers"
     type:left_outer
