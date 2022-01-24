@@ -10,13 +10,14 @@ view: d_customer {
 
   dimension: c_custkey {
     label: "Customer Key"
+    description: "Unique ID for the Customer"
     type: number
     primary_key: yes
     sql: ${TABLE}."C_CUSTKEY" ;;
   }
 
   dimension: c_mktsegment {
-    label: "Marketing Segment"
+    label: "Market Segment"
     type: number
     sql: ${TABLE}."C_MKTSEGMENT" ;;
   }
