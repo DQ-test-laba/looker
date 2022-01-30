@@ -26,10 +26,35 @@ explore: f_lineitems {
     sql_on: ${f_lineitems.l_partkey} =${d_part.p_partkey} ;;
     relationship: many_to_one
   }
-  join: d_dates {
-    view_label: "Dates"
+  join: commit_date {
+    from:  d_dates
+    view_label: "Commit Dates"
     type: left_outer
-    sql_on: ${f_lineitems.l_orderdatekey}=${d_dates.datekey} ;;
+    sql_on: ${commit_date.datekey} = ${f_lineitems.l_commitdatekey} ;;
+    relationship: many_to_one
+  }
+
+  join: order_date {
+    from:  d_dates
+    view_label: "Order Dates"
+    type: left_outer
+    sql_on: ${order_date.datekey} = ${f_lineitems.l_orderdatekey} ;;
+    relationship: many_to_one
+  }
+
+  join: receipt_date {
+    from:  d_dates
+    view_label: "Receipt Dates"
+    type: left_outer
+    sql_on: ${receipt_date.datekey} = ${f_lineitems.l_receiptdatekey} ;;
+    relationship: many_to_one
+  }
+
+  join: ship_date {
+    view_label: "Shiping Dates"
+    from:  d_dates
+    type: left_outer
+    sql_on: ${ship_date.datekey} = ${f_lineitems.l_shipdatekey} ;;
     relationship: many_to_one
   }
   join: d_customer {

@@ -13,6 +13,7 @@ view: d_customer {
     description: "Unique ID for the Customer"
     type: number
     primary_key: yes
+    hidden: yes
     sql: ${TABLE}."C_CUSTKEY" ;;
   }
 

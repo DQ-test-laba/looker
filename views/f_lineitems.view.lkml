@@ -22,6 +22,7 @@ view: f_lineitems {
 
   dimension: l_custkey {
     label: "Customer Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_CUSTKEY" ;;
   }
@@ -72,6 +73,7 @@ view: f_lineitems {
 
   dimension: l_partkey {
     label: "Part Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_PARTKEY" ;;
   }
@@ -120,6 +122,7 @@ view: f_lineitems {
 
   dimension: l_suppkey {
     label: "Supplier Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_SUPPKEY" ;;
   }
@@ -145,26 +148,119 @@ view: f_lineitems {
     value_format_name: usd
   }
 
+  dimension: is_shipped_by_air {
+    type:  yesno
+    hidden: yes
+    sql: ${l_shipmode} = 'AIR' ;;
+  }
+
   measure: count {
     type: count
     drill_fields: []
   }
 
-  measure: Total_Sale_Price {
+  measure: total_sale_price {
+    label: "Total Sale Price"
+    description: "Total sales from items sold"
     type:  sum
     sql: ${l_totalprice} ;;
     value_format_name: usd
   }
 
-  measure: Average_Sale_Price {
+  measure: average_sale_price {
+    label: "Average Sale Price"
+    description: "Average sale price of items sold"
     type: average
     sql: ${l_totalprice} ;;
     value_format_name: usd
   }
 
-  measure: Cumulative_Total_Sales {
+  measure: cumulative_total_sales {
+    label: "Cumulative Total Sales"
+    description: "Cumulative total sales from items sold (also known as a running total)"
     type: running_total
-    sql: ${Total_Sale_Price} ;;
+    sql: ${total_sale_price};;
+    value_format_name: usd
+  }
+  measure: total_sales_by_air {
+    label: "Total Sales Price Shipped By Air"
+    description: "Total sales of items shipped by air"
+    type: sum
+    filters: [is_shipped_by_air: "yes"]
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+  }
+
+  measure: total_sales_russia {
+    label: "Total Russia Sales"
+    description: "Total sales by customers from Russia"
+    type: sum
+    filters: [d_customer.c_nation: "RUSSIA"]
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+  }
+
+  measure: total_gross_revenue {
+    label: "Total Gross Revenue"
+    description: "Total price of completed sales"
+    type: sum
+    filters: [l_orderstatus: "F"]
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+  }
+
+  measure: total_cost {
+    label: "Total Cost"
+    description: "Total Sypply Cost"
+    type: sum
+    sql: ${l_supplycost} ;;
+    value_format_name: usd
+  }
+
+  measure: total_gross_margin_amount  {
+    description: "Difference between Total Revenue and Total Sypply Cost"
+    type:  number
+    sql: ${total_gross_revenue} - ${total_cost} ;;
+    value_format_name: usd
+  }
+
+  measure: gross_margin_percentage {
+    description: "Total Gross Margin Amount / Total Gross Revenue"
+    type: number
+    sql: ${total_gross_margin_amount}/ NULLIF(${total_gross_revenue},0);;
+    value_format_name: percent_2
+  }
+
+  measure: number_returned{
+    label: "Number of Items Returned"
+    description: "Number of items that were returned by dissatisfied customers"
+    type: count
+    filters: [l_returnflag: "R"]
+  }
+
+  measure: number_sold {
+    label: "Total Number of Items Sold"
+    description: "Number of items that were sold"
+    type: count
+  }
+
+  measure: item_returned_rate {
+    description: "Number of Items Returned / Total Number of Items Sold"
+    type:  number
+    sql: ${number_returned}/ NULLIF(${number_sold},0);;
+    value_format_name: decimal_2
+  }
+
+  measure: total_number_customers {
+    #hidden:  yes
+    type: count_distinct
+    sql: ${l_custkey} ;;
+  }
+
+  measure: avg_cust_spend {
+    label: "Average Spend per Customer"
+    description: "Total Sale Price / Total Number of Customers"
+    sql: ${total_sale_price} / NULLIF(${total_number_customers}, 0) ;;
     value_format_name: usd
   }
 }

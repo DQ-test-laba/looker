@@ -3,9 +3,17 @@ view: d_supplier {
     ;;
 
   dimension: s_acctbal {
-    label: "Acctbal"
+    label: "Account Balance"
     type: number
     sql: ${TABLE}."S_ACCTBAL" ;;
+  }
+
+  dimension: account_balance_tier {
+    label: "Cohort of suppliers according to Account Balance"
+    type: tier
+    tiers: [0, 3000, 5000, 7000]
+    style: integer
+    sql: ${s_acctbal} ;;
   }
 
   dimension: s_address {
@@ -40,6 +48,7 @@ view: d_supplier {
 
   dimension: s_suppkey {
     label: "Supplier Key"
+    hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}."S_SUPPKEY" ;;

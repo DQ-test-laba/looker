@@ -6,10 +6,11 @@ view: d_dates {
     label: ""
     type: time
     timeframes: [
-      raw,
       date,
-      week,
-      month,
+      day_of_week,
+      day_of_month,
+      month_num,
+      month_name,
       quarter,
       year
     ]
@@ -21,42 +22,49 @@ view: d_dates {
   dimension: datekey {
     label: "Date Key"
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}."DATEKEY" ;;
   }
 
   dimension: day_of_week {
     label: "Day of Week"
+    hidden: yes
     type: number
     sql: ${TABLE}."DAY_OF_WEEK" ;;
   }
 
   dimension: dayname_of_week {
     label: "Day Name"
+    hidden: yes
     type: string
     sql: ${TABLE}."DAYNAME_OF_WEEK" ;;
   }
 
   dimension: month_name {
     label:"Month Name"
+    hidden: yes
     type: string
     sql: ${TABLE}."MONTH_NAME" ;;
   }
 
   dimension: month_num {
     label: "Month Number"
+    hidden: yes
     type: number
     sql: ${TABLE}."MONTH_NUM" ;;
   }
 
   dimension: quarter {
     label: "Quarter"
+    hidden: yes
     type: number
     sql: ${TABLE}."QUARTER" ;;
   }
 
   dimension: year {
     label: "Year"
+    hidden: yes
     type: number
     sql: ${TABLE}."YEAR" ;;
   }
