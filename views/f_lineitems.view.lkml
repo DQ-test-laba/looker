@@ -252,7 +252,7 @@ view: f_lineitems {
   }
 
   measure: total_number_customers {
-    #hidden:  yes
+    hidden:  yes
     type: count_distinct
     sql: ${l_custkey} ;;
   }
