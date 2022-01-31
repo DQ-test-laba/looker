@@ -16,6 +16,7 @@ view: f_lineitems {
 
   dimension: l_commitdatekey {
     label: "Commit Date"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_COMMITDATEKEY" ;;
   }
@@ -49,12 +50,14 @@ view: f_lineitems {
 
   dimension: l_orderdatekey {
     label: "Order Date Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_ORDERDATEKEY" ;;
   }
 
   dimension: l_orderkey {
     label: "Order Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_ORDERKEY" ;;
   }
@@ -86,6 +89,7 @@ view: f_lineitems {
 
   dimension: l_receiptdatekey {
     label: "Receipt Date Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_RECEIPTDATEKEY" ;;
   }
@@ -98,6 +102,7 @@ view: f_lineitems {
 
   dimension: l_shipdatekey {
     label: "Ship Date Key"
+    hidden: yes
     type: number
     sql: ${TABLE}."L_SHIPDATEKEY" ;;
   }
@@ -151,7 +156,7 @@ view: f_lineitems {
   dimension: is_shipped_by_air {
     type:  yesno
     hidden: yes
-    sql: ${l_shipmode} = 'AIR' ;;
+    sql: ${l_shipmode} in ('AIR', 'REG AIR') ;;
   }
 
   measure: count {
@@ -234,14 +239,16 @@ view: f_lineitems {
   measure: number_returned{
     label: "Number of Items Returned"
     description: "Number of items that were returned by dissatisfied customers"
-    type: count
+    type: sum
+    sql: ${l_quantity} ;;
     filters: [l_returnflag: "R"]
   }
 
   measure: number_sold {
     label: "Total Number of Items Sold"
     description: "Number of items that were sold"
-    type: count
+    type: sum
+    sql: ${l_quantity} ;;
   }
 
   measure: item_returned_rate {
