@@ -46,6 +46,7 @@ view: d_dates {
     hidden: yes
     type: string
     sql: ${TABLE}."MONTH_NAME" ;;
+    order_by_field: year_month
   }
 
   dimension: month_num {
@@ -67,6 +68,11 @@ view: d_dates {
     hidden: yes
     type: number
     sql: ${TABLE}."YEAR" ;;
+  }
+  dimension: year_month {
+    hidden: yes
+    type: number
+    sql: ${year}||'-'||${month_num};;
   }
 
   measure: count {

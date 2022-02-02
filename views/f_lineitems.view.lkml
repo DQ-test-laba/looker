@@ -159,6 +159,14 @@ view: f_lineitems {
     sql: ${l_shipmode} in ('AIR', 'REG AIR') ;;
   }
 
+  dimension: pkey {
+    type:  string
+    hidden: yes
+    primary_key: yes
+    sql: ${l_orderkey}||${l_linenumber} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: []
