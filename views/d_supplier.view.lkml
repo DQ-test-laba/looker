@@ -26,6 +26,14 @@ view: d_supplier {
     label: "Name"
     type: string
     sql: ${TABLE}."S_NAME" ;;
+    link: {
+      label: "Google"
+      url: "http://www.google.com/search?q={{ value }}"
+      icon_url: "http://google.com/favicon.ico"
+      }
+    drill_fields: [items*]
+
+
   }
 
   dimension: s_nation {
@@ -57,5 +65,10 @@ view: d_supplier {
   measure: count {
     type: count
     drill_fields: [s_name]
+  }
+  set: items  {
+    fields: [d_part.p_brand,
+      d_part.p_name
+    ]
   }
 }

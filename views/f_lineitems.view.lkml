@@ -117,6 +117,8 @@ view: f_lineitems {
     label: "Ship Mode"
     type: string
     sql: ${TABLE}."L_SHIPMODE" ;;
+
+
   }
 
   dimension: l_shippriority {
@@ -159,6 +161,8 @@ view: f_lineitems {
     sql: ${l_shipmode} in ('AIR', 'REG AIR') ;;
   }
 
+
+
   dimension: pkey {
     type:  string
     hidden: yes
@@ -195,6 +199,25 @@ view: f_lineitems {
     sql: ${total_sale_price};;
     value_format_name: usd
   }
+
+  measure: sales_1994 {
+    label: "Sales Dec 1994"
+    description: "Dec1994)"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1994", order_date.date_val_month_name: "December"]
+  }
+
+  measure: sales_1995 {
+    label: "Sales Jan 1995"
+    description: "Jan1995)"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1995", order_date.date_val_month_name: "January"]
+  }
+
   measure: total_sales_by_air {
     label: "Total Sales Price Shipped By Air"
     description: "Total sales of items shipped by air"
@@ -222,19 +245,21 @@ view: f_lineitems {
     value_format_name: usd
   }
 
+
   measure: total_cost {
     label: "Total Cost"
-    description: "Total Sypply Cost"
+    description: "Total Supply Cost"
     type: sum
     sql: ${l_supplycost} ;;
     value_format_name: usd
   }
 
   measure: total_gross_margin_amount  {
-    description: "Difference between Total Revenue and Total Sypply Cost"
+    description: "Difference Between Total Revenue and Total Supply Cost"
     type:  number
     sql: ${total_gross_revenue} - ${total_cost} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
 
   measure: gross_margin_percentage {
@@ -259,6 +284,31 @@ view: f_lineitems {
     sql: ${l_quantity} ;;
   }
 
+  measure: number_sold_o {
+    label: "Total Number Status O"
+    description: "Number of items that were sold"
+    type: sum
+    sql: ${l_quantity} ;;
+    filters: [l_orderstatus: "O"]
+  }
+
+  measure: number_sold_p {
+    label: "Total Number Status P"
+    description: "Number of items that were sold"
+    type: sum
+    sql: ${l_quantity} ;;
+    filters: [l_orderstatus: "P"]
+  }
+
+  measure: number_sold_f {
+    label: "Total Number Status F"
+    description: "Number of items that were sold"
+    type: sum
+    sql: ${l_quantity} ;;
+    filters: [l_orderstatus: "F"]
+  }
+
+
   measure: item_returned_rate {
     description: "Number of Items Returned / Total Number of Items Sold"
     type:  number
@@ -278,4 +328,16 @@ view: f_lineitems {
     sql: ${total_sale_price} / NULLIF(${total_number_customers}, 0) ;;
     value_format_name: usd
   }
+
+  measure: number_orders {
+    label: "Total Number of Orders"
+    description: "Total Number of Orders"
+    type: count_distinct
+    sql: ${l_orderkey} ;;
+  }
+
+  set: detail {
+    fields: [d_supplier.s_name, d_supplier.account_balance_tier, d_supplier.s_region]
+  }
+
 }

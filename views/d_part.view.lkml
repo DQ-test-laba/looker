@@ -44,4 +44,5 @@ view: d_part {
     type: count
     drill_fields: [p_name]
   }
+
 }
