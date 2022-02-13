@@ -13,6 +13,7 @@ view: d_supplier {
     type: tier
     tiers: [0, 3001, 5001, 7001]
     style: integer
+    html: <p style="color: ##173589; font-size: 120%; fontweight: bold; text-align:center">{{value}}</p> ;;
     sql: ${s_acctbal} ;;
   }
 
@@ -31,6 +32,7 @@ view: d_supplier {
       url: "http://www.google.com/search?q={{ value }}"
       icon_url: "http://google.com/favicon.ico"
       }
+    html: <b><center><font size="2" color="#173589" >{{value}}</font></center></b> ;;
     drill_fields: [items*]
 
 

@@ -72,8 +72,8 @@ view: d_dates {
   dimension: year_month {
     hidden: yes
     type: number
-    sql: ${year}||'-'||${month_num};;
-  }
+    sql: ${year}+${month_num};;
+   }
 
   measure: count {
     type: count

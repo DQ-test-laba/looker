@@ -117,7 +117,7 @@ view: f_lineitems {
     label: "Ship Mode"
     type: string
     sql: ${TABLE}."L_SHIPMODE" ;;
-
+    html: <p style="color: ##173589; font-size: 120%; fontweight: bold; text-align:center">{{value}}</p> ;;
 
   }
 
@@ -217,7 +217,62 @@ view: f_lineitems {
     value_format_name: usd
     filters: [order_date.date_val_year: "1995", order_date.date_val_month_name: "January"]
   }
-
+  measure: sales_1992_year {
+    label: "Sales 1992"
+    description: "1992"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1992"]
+  }
+  measure: sales_1993_year {
+    label: "Sales 1993"
+    description: "1993"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1993"]
+  }
+  measure: sales_1994_year {
+    label: "Sales 1994"
+    description: "1994"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1994"]
+  }
+  measure: sales_1995_year {
+    label: "Sales 1995"
+    description: "1995"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1995"]
+  }
+  measure: sales_1996_year {
+    label: "Sales 1996"
+    description: "1996"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1996"]
+  }
+  measure: sales_1997_year {
+    label: "Sales 1997"
+    description: "1997"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1997"]
+  }
+  measure: sales_1998_year {
+    label: "Sales 1998"
+    description: "1998"
+    type:  sum
+    sql: ${l_totalprice} ;;
+    value_format_name: usd
+    filters: [order_date.date_val_year: "1998"]
+  }
   measure: total_sales_by_air {
     label: "Total Sales Price Shipped By Air"
     description: "Total sales of items shipped by air"
