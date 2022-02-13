@@ -1,17 +1,17 @@
 - dashboard: vc_dasboard_tkh
-  title: Vc Dasboard Tkh
+  title: TKh VC Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
   elements:
-  - title: Number of Items Returned by Regions in 1995
-    name: Number of Items Returned by Regions in 1995
+  - title: Number of Items Returned by Regions
+    name: Number of Items Returned by Regions
     model: looker_intensive7_t_khottchenkova
     explore: f_lineitems
     type: looker_column
     fields: [d_customer.c_region, f_lineitems.number_returned]
     filters:
-      order_date.date_val_year: '1995'
+      order_date.date_val_year: '1994'
       d_customer.c_region: "-NULL"
     sorts: [f_lineitems.number_returned desc]
     limit: 500
@@ -56,14 +56,14 @@
     col: 0
     width: 8
     height: 6
-  - title: Top-10 Brands by Returns in 1995
-    name: Top-10 Brands by Returns in 1995
+  - title: Top-10 Brands by Returns
+    name: Top-10 Brands by Returns
     model: looker_intensive7_t_khottchenkova
     explore: f_lineitems
     type: looker_column
     fields: [d_part.p_brand, f_lineitems.number_returned]
     filters:
-      order_date.date_val_year: '1995'
+      order_date.date_val_year: '1994'
     sorts: [f_lineitems.number_returned desc]
     limit: 10
     x_axis_gridlines: false
@@ -160,3 +160,24 @@
     col: 16
     width: 8
     height: 6
+  - name: add_a_unique_name_1644754991
+    title: Untitled Visualization
+    model: looker_intensive7_t_khottchenkova
+    explore: f_lineitems
+    type: table
+    fields: [f_lineitems.l_clerk, f_lineitems.number_returned]
+    filters:
+      order_date.date_val_year: '1994'
+    sorts: [f_lineitems.number_returned desc]
+    limit: 10
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: editable
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
