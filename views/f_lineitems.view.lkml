@@ -117,7 +117,7 @@ view: f_lineitems {
     label: "Ship Mode"
     type: string
     sql: ${TABLE}."L_SHIPMODE" ;;
-    html: <p style="color: ##173589; font-size: 120%; fontweight: bold; text-align:center">{{value}}</p> ;;
+    html: <p style="color: ##173589; font-size: 200%; fontweight: bold; text-align:center">{{value}}</p> ;;
 
   }
 
