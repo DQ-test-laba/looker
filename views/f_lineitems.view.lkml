@@ -65,7 +65,8 @@ view: f_lineitems {
   dimension: l_orderpriority {
     label: "Order Priority"
     type: string
-    sql: ${TABLE}."L_ORDERPRIORITY" ;;
+    sql: trim(${TABLE}."L_ORDERPRIORITY");;
+    html: <p style="margin-top: 25 px; color: ##173589; font-size: 120%; fontweight: bold; vertical-align: center;">{{value}}</p> ;;
   }
 
   dimension: l_orderstatus {
@@ -117,7 +118,7 @@ view: f_lineitems {
     label: "Ship Mode"
     type: string
     sql: ${TABLE}."L_SHIPMODE" ;;
-    html: <p style="color: ##173589; font-size: 200%; fontweight: bold; text-align:center">{{value}}</p> ;;
+    html: <p style="color: ##173589; font-size: 100%; fontweight: bold; vertical-align: center;">{{value}}</p> ;;
 
   }
 
@@ -125,6 +126,7 @@ view: f_lineitems {
     label: "Ship Priority"
     type: number
     sql: ${TABLE}."L_SHIPPRIORITY" ;;
+    html: <p style="margin-bottom: 20 px; color: ##173589; font-size: 100%; fontweight: bold; vertical-align: center;">{{value}}</p> ;;
   }
 
   dimension: l_suppkey {
