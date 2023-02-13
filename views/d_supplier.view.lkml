@@ -29,10 +29,10 @@ view: d_supplier {
     sql: ${TABLE}."S_NAME" ;;
     link: {
       label: "Google"
-      url: "http://www.google.com/search?q={{ value }}"
+      url: "http://www.google.com/search?q={{ value | url_encode }}"
       icon_url: "http://google.com/favicon.ico"
       }
-    html: <b><center><font size="2" color="#173589" >{{value}}</font></center></b> ;;
+    html: <b><center><font size="2" color="#173589" >{{value | url_encode}}</font></center></b> ;;
     drill_fields: [items*]
 
 

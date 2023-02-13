@@ -66,13 +66,24 @@ view: f_lineitems {
     label: "Order Priority"
     type: string
     sql: trim(${TABLE}."L_ORDERPRIORITY");;
-    html: <p style="margin-top: 25 px; color: ##173589; font-size: 120%; fontweight: bold; vertical-align: center;">{{value}}</p> ;;
+    html: <p style="margin-top: 0 px; color: ##173589; font-size: 80%; fontweight: bold; vertical-align: center;">{{value}}</p> ;;
   }
 
   dimension: l_orderstatus {
     label: "Order Status"
+    hidden: yes
     type: string
     sql: ${TABLE}."L_ORDERSTATUS" ;;
+  }
+
+  dimension: orderstatus {
+    label: "Order Status"
+    type: string
+    sql: case when ${TABLE}."L_ORDERSTATUS" = 'O' then 'Open'
+              when ${TABLE}."L_ORDERSTATUS" = 'F' then 'Finished'
+              when ${TABLE}."L_ORDERSTATUS" = 'P' then 'Pending'
+              end
+              ;;
   }
 
   dimension: l_partkey {
